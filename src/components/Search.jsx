@@ -105,6 +105,11 @@ const SearchBar = () => {
         
         alert(errorMessage);
         setLoading(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
       }
     );
   };
