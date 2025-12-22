@@ -35,8 +35,9 @@ const NearbyTreks = () => {
         setLoading(false);
       },
       {
-        enableHighAccuracy: true,
-        timeout: 8000,
+        enableHighAccuracy: false,
+        timeout: 30000,
+        maximumAge: 300000
       }
     );
   }, []);
