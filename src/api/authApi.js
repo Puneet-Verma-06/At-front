@@ -85,9 +85,23 @@ export async function signupCompleteApi(payload) {
 // Login
 export async function signinApi({ email, password }) {
   try {
+    console.log("🔐 Attempting signin:", { email, baseURL });
     const res = await api.post("/api/auth/signin", { email, password });
+    console.log("✅ Signin response:", res);
     return ok(res);
   } catch (err) {
+    console.error("❌ Signin error:", {
+      status: err.response?.status,
+      statusText: err.response?.statusText,
+      data: err.response?.data,
+      message: err.message,
+      config: {
+        url: err.config?.url,
+        method: err.config?.method,
+        headers: err.config?.headers,
+        data: err.config?.data,
+      }
+    });
     return toNiceError(err);
   }
 }
