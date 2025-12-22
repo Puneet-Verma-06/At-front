@@ -4,7 +4,6 @@ import { ENDPOINTS, API_BASE } from "./allApi"; // API_BASE optional
 
 
 export const axiosInstance = axios.create({
-  baseURL: API_BASE || undefined,
   timeout: 30_000, // 30s sensible default
 });
 

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronDown, FiX, FiUpload } from "react-icons/fi";
-import * as PostsAPI from "../../api/posts";
+import * as ServicesAPI from "../../api/services";
 
 const GOLD = "#C59D5F";
 const INPUT_STYLE = { borderColor: "#F0F0F0", background: "#FAFBFB" };
@@ -342,7 +342,7 @@ export default function HostServiceForm({ onSaved }) {
     setProgress(0);
     try {
       const token = window.localStorage.getItem("auth_token");
-      const res = await PostsAPI.createPost(fd, {
+      const res = await ServicesAPI.createService(fd, {
         token,
         onUploadProgress: (evtPercent) => {
           // support both direct percent or evt.loaded/evt.total if used differently
@@ -519,11 +519,23 @@ export default function HostServiceForm({ onSaved }) {
 
                   <div className="flex flex-wrap gap-2 mb-3">
                     {[
-                      "Consulting",
-                      "Guiding",
-                      "Transfers",
-                      "Classes",
-                      "Equipment",
+                      "Adventure",
+                      "Cultural",
+                      "Nature",
+                      "Photography",
+                      "Camping",
+                      "Mountain",
+                      "Wildlife",
+                      "Spiritual",
+                      "Beach",
+                      "Desert",
+                      "Forest",
+                      "Historical",
+                      "Pilgrimage",
+                      "Snow",
+                      "Backpacking",
+                      "Luxury",
+                      "Budget",
                     ].map((o) => (
                       <button
                         key={o}

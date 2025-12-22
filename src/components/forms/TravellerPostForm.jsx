@@ -197,6 +197,18 @@ export default function TravellerPostForm() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
 
+  // Location fields
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("India");
+  
+  // Additional fields for experiences
+  const [difficulty, setDifficulty] = useState("Easy");
+  const [pricePerPerson, setPricePerPerson] = useState("");
+  const [maxPeople, setMaxPeople] = useState("");
+  const [days, setDays] = useState("");
+  const [nights, setNights] = useState("");
+
   /* ---------------- Photos ---------------- */
   const onDropPhotos = useCallback((files) => {
     setPhotos((p) => [
@@ -229,28 +241,37 @@ export default function TravellerPostForm() {
     }
 
     const fd = new FormData();
-    fd.append("postType", POST_TYPE);
     fd.append("title", title);
     fd.append("description", description);
     fd.append("categories", JSON.stringify(categories));
-    fd.append("tags", JSON.stringify(tags));
     fd.append("amenities", JSON.stringify(amenities));
-    // -------- LOCATION PAYLOAD (FRONTEND) --------
-    const locationPayload = {
-      city: "",
-      state: "",
-      country: "India",
-    };
+    
+    // -------- LOCATION FIELDS (FRONTEND) --------
+    // The backend expects city, state, country as separate fields
+    if (city) fd.append("city", city);
+    if (state) fd.append("state", state);
+    if (country) fd.append("country", country);
+    
+    // -------- ADDITIONAL FIELDS --------
+    if (difficulty) fd.append("difficulty", difficulty);
+    if (pricePerPerson) fd.append("pricePerPerson", pricePerPerson);
+    if (maxPeople) fd.append("maxPeople", maxPeople);
+    if (days) fd.append("days", days);
+    if (nights) fd.append("nights", nights);
 
-    // only attach coordinates if user actually selected them
-    if (latitude !== null && longitude !== null) {
-      locationPayload.coordinates = {
-        type: "Point",
-        coordinates: [longitude, latitude], // [lng, lat]
+    // only attach coordinates if user actually selected them (not null, not undefined, not 0)
+    console.log("Latitude:", latitude, "Longitude:", longitude);
+    if (latitude != null && longitude != null && latitude !== 0 && longitude !== 0) {
+      console.log("Adding coordinates to location");
+      // Send location as a JSON string with proper GeoJSON structure
+      const locationPayload = {
+        coordinates: {
+          type: "Point",
+          coordinates: [Number(longitude), Number(latitude)], // [lng, lat]
+        }
       };
+      fd.append("location", JSON.stringify(locationPayload));
     }
-
-    fd.append("location", JSON.stringify(locationPayload));
 
     photos.forEach((p) => fd.append("photos", p.file));
 
@@ -267,6 +288,17 @@ export default function TravellerPostForm() {
       setTags([]);
       setAmenities([]);
       setPhotos([]);
+      setCity("");
+      setState("");
+      setCountry("India");
+      setDifficulty("Easy");
+      setPricePerPerson("");
+      setMaxPeople("");
+      setDays("");
+      setNights("");
+    } catch (error) {
+      console.error("Post creation error:", error);
+      alert(error.message || "Failed to create post. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -291,6 +323,98 @@ export default function TravellerPostForm() {
           placeholder="Describe the experience"
           className="input-lux rounded-lg px-3 py-2 w-full mt-2"
         />
+      </Section>
+
+      {/* ================= LOCATION ================= */}
+      <Section title="Location">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="text-xs muted mb-1 block">City</label>
+            <input
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="e.g. Sankri"
+              className="input-lux rounded-xl px-3 py-2 w-full text-sm"
+            />
+          </div>
+
+          <div>
+            <label className="text-xs muted mb-1 block">State/Province</label>
+            <input
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              placeholder="e.g. Uttarakhand"
+              className="input-lux rounded-xl px-3 py-2 w-full text-sm"
+            />
+          </div>
+
+          <div>
+            <label className="text-xs muted mb-1 block">Country</label>
+            <input
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              placeholder="e.g. India"
+              className="input-lux rounded-xl px-3 py-2 w-full text-sm"
+            />
+          </div>
+        </div>
+      </Section>
+
+      {/* ================= EXPERIENCE DETAILS ================= */}
+      <Section title="Experience details">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <AnimatedSelect
+            label="Difficulty"
+            value={difficulty}
+            options={["Easy", "Moderate", "Challenging", "Difficult"]}
+            onChange={setDifficulty}
+          />
+
+          <div>
+            <label className="text-xs muted mb-1 block">Price per person (₹)</label>
+            <input
+              type="number"
+              value={pricePerPerson}
+              onChange={(e) => setPricePerPerson(e.target.value)}
+              placeholder="e.g. 18000"
+              className="input-lux rounded-xl px-3 py-2 w-full text-sm"
+            />
+          </div>
+
+          <div>
+            <label className="text-xs muted mb-1 block">Max people</label>
+            <input
+              type="number"
+              value={maxPeople}
+              onChange={(e) => setMaxPeople(e.target.value)}
+              placeholder="e.g. 15"
+              className="input-lux rounded-xl px-3 py-2 w-full text-sm"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="text-xs muted mb-1 block">Days</label>
+              <input
+                type="number"
+                value={days}
+                onChange={(e) => setDays(e.target.value)}
+                placeholder="e.g. 6"
+                className="input-lux rounded-xl px-3 py-2 w-full text-sm"
+              />
+            </div>
+            <div>
+              <label className="text-xs muted mb-1 block">Nights</label>
+              <input
+                type="number"
+                value={nights}
+                onChange={(e) => setNights(e.target.value)}
+                placeholder="e.g. 5"
+                className="input-lux rounded-xl px-3 py-2 w-full text-sm"
+              />
+            </div>
+          </div>
+        </div>
       </Section>
 
       {/* ================= CLASSIFICATION ================= */}

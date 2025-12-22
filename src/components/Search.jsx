@@ -108,8 +108,8 @@ const SearchBar = () => {
       },
       {
         enableHighAccuracy: false,
-        timeout: 30000,
-        maximumAge: 300000
+        timeout: 60000,          // 60 seconds
+        maximumAge: 600000       // 10 minutes cache
       }
     );
   };

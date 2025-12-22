@@ -65,7 +65,7 @@ const toNiceError = (error) => {
 // Step 1: Signup initiate
 export async function signupInitiateApi(payload) {
   try {
-    const res = await api.post("/auth/signup/initiate", payload);
+    const res = await api.post("/api/auth/signup/initiate", payload);
     return ok(res);
   } catch (err) {
     return toNiceError(err);
@@ -75,7 +75,7 @@ export async function signupInitiateApi(payload) {
 // Step 2: Signup complete (OTP)
 export async function signupCompleteApi(payload) {
   try {
-    const res = await api.post("/auth/signup/complete", payload);
+    const res = await api.post("/api/auth/signup/complete", payload);
     return ok(res);
   } catch (err) {
     return toNiceError(err);
@@ -85,7 +85,7 @@ export async function signupCompleteApi(payload) {
 // Login
 export async function signinApi({ email, password }) {
   try {
-    const res = await api.post("/auth/signin", { email, password });
+    const res = await api.post("/api/auth/signin", { email, password });
     return ok(res);
   } catch (err) {
     return toNiceError(err);
@@ -99,7 +99,7 @@ export async function getUserDetailsApi() {
     if (!token) throw new Error("No token");
 
     const decoded = jwtDecode(token);
-    const res = await api.get(`/users/profile/${decoded.userId}`);
+    const res = await api.get(`/api/users/profile/${decoded.userId}`);
     return ok(res);
   } catch (err) {
     return toNiceError(err);

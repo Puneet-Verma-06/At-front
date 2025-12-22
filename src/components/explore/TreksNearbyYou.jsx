@@ -31,13 +31,22 @@ const NearbyTreks = () => {
       },
       (err) => {
         console.warn("Location denied:", err);
-        setError("Location permission denied");
+        
+        // Better error messages
+        let errorMsg = "Location permission denied";
+        if (err.code === 3) {
+          errorMsg = "Location request timed out. Please check your GPS settings.";
+        } else if (err.code === 2) {
+          errorMsg = "Location unavailable. Please try again.";
+        }
+        
+        setError(errorMsg);
         setLoading(false);
       },
       {
         enableHighAccuracy: false,
-        timeout: 30000,
-        maximumAge: 300000
+        timeout: 60000,          // 60 seconds
+        maximumAge: 600000       // 10 minutes cache
       }
     );
   }, []);

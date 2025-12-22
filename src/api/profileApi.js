@@ -6,7 +6,7 @@ export async function getProfileByIdApi(userId) {
   const token = localStorage.getItem("auth_token");
 
   const res = await axios.get(
-    `${API_BASE}/users/profile/${userId}`,
+    `${API_BASE}/api/users/profile/${userId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -21,7 +21,7 @@ export async function updateUserLocationApi(locationData) {
   const token = localStorage.getItem("auth_token");
 
   const res = await axios.put(
-    `${API_BASE}/users/location`,
+    `${API_BASE}/api/users/location`,
     locationData,
     {
       headers: {
