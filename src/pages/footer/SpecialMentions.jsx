@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Carousel from "../components/Carousel";
+import Carousel from "../../components/Carousel";
 import { FiMail, FiPhone, FiX } from "react-icons/fi";
 
 const fallbackImg =

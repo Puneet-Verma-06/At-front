@@ -6,7 +6,7 @@ import Footer from "./components/Static/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Creators from "./pages/Creators";
-import SpecialMentionsPage from "./pages/SpecialMentions";
+import SpecialMentionsPage from "./pages/footer/SpecialMentions";
 import HelpSupportPage from "./pages/footer/Support";
 import Explore from "./pages/Explore";
 import CreatePostForm from "./pages/PostForm";
@@ -22,6 +22,10 @@ import UttarakhandItineraries from "./pages/guides/UttarakhandItineraries";
 import UttarakhandTravelCost from "./pages/guides/UttarakhandTravelCost";
 import UttarakhandPackingList from "./pages/guides/UttarakhandPackingList";
 import UttarakhandTravelTips from "./pages/guides/UttarakhandTravelTips";
+import Terms from "./pages/footer/Terms";
+import Safety from "./pages/footer/Safety";
+import ForHost from "./pages/footer/ForHost";
+import AboutUs from "./pages/footer/About";
 
 function App() {
   const location = useLocation();
@@ -36,34 +40,18 @@ function App() {
 
       <main className="grow">
         <Routes>
-          {/* ✅ PUBLIC ROUTE */}
+          {/* PUBLIC ROUTE */}
           <Route path="/" element={<Home />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/safety" element={<Safety />} />
+          <Route path="/host" element={<ForHost />} />
+          <Route path="/mentions" element={<SpecialMentionsPage />} />
+          <Route path="/creators" element={<Creators />} />
+          <Route path="/support" element={<HelpSupportPage />} />
+          <Route path="/about" element={<AboutUs />} />
 
-          {/* 🔒 PROTECTED ROUTES */}
-          <Route
-            path="/mentions"
-            element={
-              <ProtectedRoute>
-                <SpecialMentionsPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/creators"
-            element={
-              <ProtectedRoute>
-                <Creators />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/support"
-            element={
-              <ProtectedRoute>
-                <HelpSupportPage />
-              </ProtectedRoute>
-            }
-          />
+          {/* PROTECTED ROUTES */}
+
           <Route
             path="/explore"
             element={
