@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   FaStar,
   FaPhoneAlt,
-  FaEnvelope,
   FaRupeeSign,
   FaHeadset,
   FaStarHalfAlt,
+  FaHeart,
 } from "react-icons/fa";
 import SmallCarousel from "../components/SmallCarousel";
 
@@ -15,7 +15,7 @@ const HERO_SRC =
   "https://images.pexels.com/photos/16660010/pexels-photo-16660010.jpeg?cs=srgb&dl=pexels-vinod-singh-489965859-16660010.jpg&fm=jpg";
 
 const PHOTO_IMAGES = [
-    "https://i0.wp.com/www.travelkingindia.com/wp-content/uploads/2025/08/Chopta-1.jpg?fit=910%2C512&ssl=1",
+  "https://i0.wp.com/www.travelkingindia.com/wp-content/uploads/2025/08/Chopta-1.jpg?fit=910%2C512&ssl=1",
   HERO_SRC,
   "https://images.pexels.com/photos/18893740/pexels-photo-18893740.jpeg",
 ];
@@ -448,7 +448,7 @@ export default function SinglePlace({ tabs = TABS }) {
                       style={{ color: COLORS.text }}
                       className="font-semibold text-lg"
                     >
-                      Why Book With Us?
+                      Why Choose Athithya?
                     </h4>
                   </div>
 
@@ -458,43 +458,74 @@ export default function SinglePlace({ tabs = TABS }) {
                       style={{ borderColor: COLORS.border }}
                     >
                       <li
-                        className="flex items-center gap-3 px-4 py-4"
-                        style={{ color: COLORS.muted }}
-                      >
-                        <div style={{ width: 28, color: COLORS.gold }}>
-                          <FaRupeeSign />
-                        </div>
-                        <div>No-hassle best price guarantee</div>
-                      </li>
-
-                      <li
-                        className="flex items-center gap-3 px-4 py-4"
-                        style={{ color: COLORS.muted }}
-                      >
-                        <div style={{ width: 28, color: COLORS.gold }}>
-                          <FaHeadset />
-                        </div>
-                        <div>Customer care available 24/7</div>
-                      </li>
-
-                      <li
-                        className="flex items-center gap-3 px-4 py-4"
+                        className="flex items-start gap-3 px-4 py-4"
                         style={{ color: COLORS.muted }}
                       >
                         <div style={{ width: 28, color: COLORS.gold }}>
                           <FaStar />
                         </div>
-                        <div>Hand-picked Tours & Activities</div>
+                        <div>
+                          <strong style={{ color: COLORS.text }}>
+                            Experiences led by locals
+                          </strong>
+                          <p className="text-xs mt-1">
+                            Travel with people who live here — not agents, not
+                            middlemen.
+                          </p>
+                        </div>
                       </li>
 
                       <li
-                        className="flex items-center gap-3 px-4 py-4"
+                        className="flex items-start gap-3 px-4 py-4"
                         style={{ color: COLORS.muted }}
                       >
                         <div style={{ width: 28, color: COLORS.gold }}>
-                          <FaEnvelope />
+                          <FaRupeeSign />
                         </div>
-                        <div>Free Travel Insurance</div>
+                        <div>
+                          <strong style={{ color: COLORS.text }}>
+                            Transparent & fair pricing
+                          </strong>
+                          <p className="text-xs mt-1">
+                            No hidden charges. What you see is what you pay.
+                          </p>
+                        </div>
+                      </li>
+
+                      <li
+                        className="flex items-start gap-3 px-4 py-4"
+                        style={{ color: COLORS.muted }}
+                      >
+                        <div style={{ width: 28, color: COLORS.gold }}>
+                          <FaHeadset />
+                        </div>
+                        <div>
+                          <strong style={{ color: COLORS.text }}>
+                            On-trip human support
+                          </strong>
+                          <p className="text-xs mt-1">
+                            Real people available before, during, and after your
+                            journey.
+                          </p>
+                        </div>
+                      </li>
+
+                      <li
+                        className="flex items-start gap-3 px-4 py-4"
+                        style={{ color: COLORS.muted }}
+                      >
+                        <div style={{ width: 28, color: COLORS.gold }}>
+                          <FaHeart />
+                        </div>
+                        <div>
+                          <strong style={{ color: COLORS.text }}>
+                            Community-driven travel
+                          </strong>
+                          <p className="text-xs mt-1">
+                            Built on trust, stories, and shared experiences —
+                            not mass tourism.
+                          </p>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -529,7 +560,7 @@ export default function SinglePlace({ tabs = TABS }) {
                       <div style={{ fontSize: 18 }} className="opacity-95">
                         ✉️
                       </div>
-                      <div className="font-semibold">hello@athithya.in</div>
+                      <div className="font-semibold">teamsathithya@gmail.com</div>
                     </div>
                   </div>
                 </div>

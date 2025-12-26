@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Navbar from "./components/Static/Navbar";
 import Footer from "./components/Static/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
+
 import Home from "./pages/Home";
 import Creators from "./pages/Creators";
 import SpecialMentionsPage from "./pages/footer/SpecialMentions";
@@ -34,13 +35,28 @@ function App() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  const protectedPrefixes = [
+    "/explore",
+    "/search",
+    "/connect",
+    "/profile",
+    "/post",
+    "/place",
+    "/chat",
+    "/guides",
+  ];
+
+  const isProtectedRoute = protectedPrefixes.some((path) =>
+    location.pathname.startsWith(path)
+  );
+
   return (
     <div className="relative min-h-screen flex flex-col">
       <Navbar />
 
       <main className="grow">
         <Routes>
-          {/* PUBLIC ROUTE */}
+          {/* PUBLIC ROUTES */}
           <Route path="/" element={<Home />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/safety" element={<Safety />} />
@@ -51,7 +67,6 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
 
           {/* PROTECTED ROUTES */}
-
           <Route
             path="/explore"
             element={
@@ -109,7 +124,7 @@ function App() {
             }
           />
 
-          {/* 🔒 GUIDES */}
+          {/* GUIDES */}
           <Route
             path="/guides/best-season-to-visit-uttarakhand"
             element={
@@ -169,7 +184,8 @@ function App() {
         </Routes>
       </main>
 
-      <Footer />
+      {/* Footer ONLY on public pages */}
+      {!isProtectedRoute && <Footer />}
     </div>
   );
 }

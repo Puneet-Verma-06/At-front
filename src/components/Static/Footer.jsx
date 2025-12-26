@@ -17,8 +17,8 @@ export default function Footer() {
             />
             <address className="not-italic text-sm leading-relaxed text-gray-600">
               <span className="font-semibold text-yellow-600">Registered Address:</span><br />
-              Athithya Brands Pvt. Ltd.<br />
-              204, Sunrise Tower, Rajpur Road,<br />
+              Athithya Brands<br />
+              Clement Town<br />
               Dehradun, Uttarakhand — 248001
             </address>
             <Link
@@ -48,7 +48,7 @@ export default function Footer() {
 
           {/* --- Column 3: Legal + Social --- */}
           <div className="flex flex-col gap-2 md:items-end">
-            <h4 className="font-semibold text-yellow-600 mb-1">Legal</h4>
+            <h4 className="font-semibold text-yellow-600 mb-1">Important Information</h4>
             <Link to="/terms" className="hover:text-yellow-600 transition">
               Terms & Conditions
             </Link>
@@ -89,7 +89,7 @@ export default function Footer() {
                 <FaYoutube size={18} />
               </a>
               <a
-                href="mailto:hello@athithya.in"
+                href="mailto:teamsathithya@gmail.com"
                 className="text-yellow-600 hover:text-yellow-500 transition"
                 aria-label="Email"
               >

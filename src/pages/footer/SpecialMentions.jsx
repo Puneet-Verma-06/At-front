@@ -17,14 +17,14 @@ const team = [
   {
     name: "Puneet",
     role: "Tech Lead",
-    img: fallbackImg,
+    img: "/members/puneet-photo.jpg",
     bio:
       "Leads our engineering stack with a focus on performance, accessibility, and clean DX.",
   },
   {
     name: "Muskan",
     role: "Design Lead",
-    img: fallbackImg,
+    img: "/members/muskan-photo.jpg",
     bio:
       "Crafts human-centered interfaces and visual systems that scale across devices.",
   },
@@ -38,7 +38,7 @@ const team = [
   {
     name: "Vansh",
     role: "Marketing",
-    img: fallbackImg,
+    img: "/members/vansh-photo.jpg",
     bio:
       "Builds campaigns that connect the right audiences with the right experiences.",
   },
@@ -52,7 +52,7 @@ const team = [
   {
     name: "Yuvraj",
     role: "Finance / Legal",
-    img: fallbackImg,
+    img: "/members/yuvraj-photo.jpg",
     bio:
       "Keeps our operations sharp and compliant while enabling smart growth.",
   },

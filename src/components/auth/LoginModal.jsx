@@ -72,19 +72,19 @@ export default function LoginModal({ onClose, onSwitchToRegister }) {
         return;
       }
 
-      // 1️⃣ Save token
+      // Save token
       localStorage.setItem("auth_token", token);
 
-      // 2️⃣ Fetch user (wait!)
+      // Fetch user (wait!)
       await fetchUser();
 
-      // 3️⃣ IMPORTANT: unlock scroll BEFORE navigation
+      //  IMPORTANT: unlock scroll BEFORE navigation
       unlockScroll();
 
-      // 4️⃣ Navigate
+      //  Navigate
       navigate("/explore", { replace: true });
 
-      // 5️⃣ Close modal
+      // Close modal
       onClose?.();
     } catch (error) {
       console.error("Login error:", error);
@@ -192,7 +192,7 @@ export default function LoginModal({ onClose, onSwitchToRegister }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full text-white py-2 rounded-lg disabled:opacity-70 transition"
+            className="cursor-pointer w-full text-white py-2 rounded-lg disabled:opacity-70 transition"
             style={{ backgroundColor: GOLD }}
           >
             {loading ? "Logging in..." : "Login"}

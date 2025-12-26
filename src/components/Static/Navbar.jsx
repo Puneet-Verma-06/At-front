@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiUser } from "react-icons/fi";
 import { FaBell } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
@@ -10,15 +10,15 @@ import AuthModal from "../auth/AuthSection";
 import { useAuth } from "../../context/AuthContext";
 
 export default function Navbar() {
-  const { user, logout, loading } = useAuth();
+  const { user, loading } = useAuth();
+  const location = useLocation();
 
   const [scrolled, setScrolled] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const location = useLocation();
-  const navigate = useNavigate();
   const threshold = 50;
+  const isHome = location.pathname === "/";
 
   /* ---------------- Scroll effect ---------------- */
   useEffect(() => {
@@ -28,25 +28,22 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [location.pathname]);
 
-  /* ---------------- Close dropdown on outside click ---------------- */
+  /* ---------------- Close profile dropdown ---------------- */
   useEffect(() => {
-    const closeDropdown = (e) => {
+    const close = (e) => {
       if (!e.target.closest(".profile-dropdown")) {
         setDropdownOpen(false);
       }
     };
-    document.addEventListener("mousedown", closeDropdown);
-    return () => document.removeEventListener("mousedown", closeDropdown);
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
   }, []);
 
-  /* ✅ Auto-close auth modal after login */
+  /* ---------------- Auto close auth modal ---------------- */
   useEffect(() => {
-    if (user) {
-      setShowAuth(false);
-    }
+    if (user) setShowAuth(false);
   }, [user]);
 
-  const isHome = location.pathname === "/";
   const navBase = "fixed inset-x-0 top-0 z-50 transition-all duration-300";
   const heroNav = scrolled
     ? "bg-black/60 backdrop-blur-md shadow-lg"
@@ -57,7 +54,23 @@ export default function Navbar() {
     ? scrolled
       ? "text-[#C59A2F]"
       : "text-white/90"
-    : "text-[#C59A2F] border rounded-full p-2";
+    : "text-[#C59A2F]";
+
+  const centerLinkStyle = (path) =>
+    `relative text-[0.975rem] font-medium transition-all duration-300
+   after:content-[''] after:absolute after:left-0 after:-bottom-1
+   after:h-[2px] after:w-0 after:bg-[#C59A2F]
+   after:transition-all after:duration-300
+   hover:after:w-full
+   ${
+     location.pathname === path
+       ? "text-[#C59A2F] after:w-full"
+       : isHome
+       ? scrolled
+         ? "text-white/90 hover:text-[#C59A2F]"
+         : "text-white/80 hover:text-white"
+       : "text-gray-700 hover:text-[#C59A2F]"
+   }`;
 
   /* ---------------- Block render until auth resolves ---------------- */
   if (loading) {
@@ -72,7 +85,7 @@ export default function Navbar() {
         className={`${navBase} ${isHome ? heroNav : contentNav}`}
         style={{ height: 64 }}
       >
-        <div className="mx-auto h-full px-6 sm:px-12 flex items-center justify-between">
+        <div className="w-full h-full flex items-center justify-between px-4">
           {/* LOGO */}
           <Link to="/" className="flex items-center">
             <img
@@ -82,15 +95,25 @@ export default function Navbar() {
             />
           </Link>
 
+          {/* CENTER LINKS (hidden on small screens) */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link to="/host" className={centerLinkStyle("/host")}>
+              For Host
+            </Link>
+            <Link to="/creators" className={centerLinkStyle("/creators")}>
+              For Creators
+            </Link>
+            <Link to="/about" className={centerLinkStyle("/about")}>
+              About Us
+            </Link>
+          </div>
+
           {/* RIGHT ACTIONS */}
           <div className="flex items-center gap-5">
             {user ? (
               <>
                 {/* NOTIFICATIONS */}
-                <Link
-                  to="/notifications"
-                  className={`relative transition-colors ${iconColor}`}
-                >
+                <Link to="/notifications" className={`relative ${iconColor}`}>
                   <FaBell size={20} />
                   <span className="absolute -top-2 -right-1 text-[10px] bg-[#C59A2F] text-white rounded-full px-1">
                     0
@@ -120,10 +143,10 @@ export default function Navbar() {
                         ? scrolled
                           ? "bg-[#C59A2F] text-white"
                           : "border border-white/80 text-white"
-                        : "text-[#C59A2F] border border-[#C59A2F]"
+                        : "border border-[#C59A2F] text-[#C59A2F]"
                     }`}
                   >
-                    <RxHamburgerMenu size={19} />
+                    <RxHamburgerMenu size={18} />
                   </button>
 
                   <div
@@ -156,24 +179,13 @@ export default function Navbar() {
                         {label}
                       </Link>
                     ))}
-
-                    <button
-                      onClick={() => {
-                        setDropdownOpen(false);
-                        logout();
-                        navigate("/");
-                      }}
-                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                    >
-                      Logout
-                    </button>
                   </div>
                 </div>
               </>
             ) : (
               <button
                 onClick={() => setShowAuth(true)}
-                className="flex items-center gap-2 px-5 py-2 bg-[#C59A2F] text-white rounded shadow-lg"
+                className="cursor-pointer flex items-center gap-2 px-5 py-2 bg-[#C59A2F] text-white rounded shadow-lg"
               >
                 <FiUser />
                 Login / Sign up
@@ -183,6 +195,7 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* AUTH MODAL */}
       {showAuth &&
         createPortal(
           <AuthModal onClose={() => setShowAuth(false)} />,

@@ -216,7 +216,7 @@ const Explore = () => {
 
       {/* Top Locations */}
       <CarouselRow
-        title="Top Treks in Uttarakhand"
+        title="Top Locations in Uttarakhand"
         subtitle="Explore the most loved states and cities"
         actionLabel="View all"
         backgroundClass="bg-white"
