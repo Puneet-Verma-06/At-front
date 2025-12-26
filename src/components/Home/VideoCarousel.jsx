@@ -64,7 +64,7 @@ export default function VideoCarousel() {
 
                 <h1 className="hero-main text-white text-4xl md:text-6xl font-extrabold leading-tight">
                   Coz{" "}
-                  <span className="text-gradient-gold italic">
+                  <span className="text-gradient-gold italic px-2">
                     “You Only Live Once”
                   </span>
                 </h1>
