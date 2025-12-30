@@ -9,9 +9,8 @@ export default function BaseTravelProfile({ user, isOwner, children }) {
       <div
         className="h-56 md:h-72 lg:h-96 bg-center bg-cover border-b"
         style={{
-          backgroundImage: `url(${
-            user?.background || "https://www.theindia.co.in/blog/wp-content/uploads/2023/09/Thighest-peak-of-uttarakhand.jpg"
-          })`,
+          backgroundImage: `url(${user?.background || "https://www.theindia.co.in/blog/wp-content/uploads/2023/09/Thighest-peak-of-uttarakhand.jpg"
+            })`,
           filter: "brightness(0.85)",
         }}
       />
@@ -27,11 +26,17 @@ export default function BaseTravelProfile({ user, isOwner, children }) {
           {/* Avatar */}
           <div className="shrink-0 -mt-12 md:mt-0">
             <div className="w-32 h-32 rounded-full ring-4 ring-white overflow-hidden shadow">
-              <img
-                src={user?.avatar || "/avatar-placeholder.png"}
-                alt="avatar"
-                className="w-full h-full object-cover"
-              />
+              {user?.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt="avatar"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-[#C59A2F] flex items-center justify-center text-white text-3xl font-bold uppercase tracking-tighter">
+                  {user?.firstname?.charAt(0) || ""}{user?.lastname?.charAt(0) || (user?.firstname ? "" : "U")}
+                </div>
+              )}
             </div>
           </div>
 

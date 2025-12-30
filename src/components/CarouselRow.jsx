@@ -27,11 +27,11 @@ const CarouselRow = ({
     <section className={`${backgroundClass} py-10 px-4 md:px-12`}>
       <div className="flex justify-between items-end mb-5">
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#C59A2F] italic">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#C59A2F] italic text-left">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-sm md:text-base text-gray-600 mt-1">
+            <p className="text-sm md:text-base text-gray-600 mt-1 text-left">
               {subtitle}
             </p>
           )}
