@@ -3,10 +3,10 @@ import { motion, useTransform, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 
 const IMAGES = [
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTynNtlZjC3B1-E8QpTPLLAYdR_Du2gIp71VQ&s",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8znpBNJWTLR2bVuEWpmk1d_OHuLnJzm6fkQ&s",
-  "https://www.himalayanacademy.com/media/books/what-is-hinduism/web/images/img296.jpg",
-  "https://images.squarespace-cdn.com/content/v1/5349ba13e4b095a3fb0ba65c/6028c2b2-d464-4a26-968d-6dcb25546c3c/Travel-Bag-Carry-Pen-Show-Edition.jpeg",
+  "/images/travel-1.jpg",
+  "/images/travel-2.jpg",
+  "/images/travel-3.jpg",
+  "/images/travel-4.jpg",
 ];
 
 export default function RightContent({ scrollYProgress }) {
@@ -35,9 +35,8 @@ export default function RightContent({ scrollYProgress }) {
           style={{
             scale: i === activeIndex ? scale : 1,
           }}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-            i === activeIndex ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${i === activeIndex ? "opacity-100" : "opacity-0"
+            }`}
         />
       ))}
 

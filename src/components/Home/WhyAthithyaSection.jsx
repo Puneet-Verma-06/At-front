@@ -41,7 +41,7 @@ export default function WhyAthithyaSection() {
           className="absolute inset-0 will-change-transform"
         >
           <img
-            src="https://img.freepik.com/free-photo/landscape-hills-covered-buildings-forests-cloudy-sky-night_181624-12599.jpg?semt=ais_hybrid&w=740&q=80"
+            src="/images/travel-5.jpg"
             alt=""
             className="w-full h-[120%] object-cover"
           />
